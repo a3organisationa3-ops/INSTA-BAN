@@ -3,58 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Instagram Ban Tool</title>
+  <title>Insta Ban Tool - Login</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <h1>Insta Ban Analysis</h1>
-    <p class="tagline">Analyze any Instagram account before banning.</p>
-    
-    <!-- Step 1: Username Input -->
-    <div id="step1">
-      <input type="text" id="username" placeholder="Enter Instagram Username">
-      <button onclick="fetchData()">Analyze</button>
-    </div>
-
-    <!-- Step 2: Analysis Result -->
-    <div id="result" class="hidden">
-      <img id="profile-pic" alt="Profile Picture">
-      <h2 id="full-name"></h2>
-      <p><strong>Username:</strong> <span id="user"></span></p>
-      <p><strong>Bio:</strong> <span id="bio"></span></p>
-      <p><strong>Followers:</strong> <span id="followers"></span></p>
-      <p><strong>Following:</strong> <span id="following"></span></p>
-      <p><strong>Posts:</strong> <span id="posts"></span></p>
-      <p><strong>Account Type:</strong> <span id="private"></span></p>
-      <button onclick="showKeyInput()">Proceed to Ban</button>
-    </div>
-
-    <!-- Step 3: Key Verification -->
-    <div id="key-section" class="hidden">
-      <h2>Enter Access Key</h2>
-      <input type="text" id="access-key" placeholder="Enter key here">
-      <button onclick="verifyKey()">Verify Key</button>
-      <p id="key-error" class="error-msg"></p>
-    </div>
-
-    <!-- Step 4: Ban Process -->
-    <div id="ban-process" class="hidden">
-      <h2>Ban Process Started</h2>
-      <div id="progress-bar-container">
-        <div id="progress-bar"></div>
-      </div>
-      <p id="progress-text">Initializing ban process...</p>
-    </div>
-
-    <!-- Step 5: Server Crash -->
-    <div id="crash-screen" class="hidden">
-      <h2>ERROR 502 - Server Down</h2>
-      <p>Our servers are currently under heavy maintenance.<br>
-      Please try again later.</p>
-    </div>
+    <h1>Insta Ban Tool</h1>
+    <p>Enter access key to continue</p>
+    <input type="password" id="keyInput" placeholder="Enter Access Key">
+    <button onclick="validateKey()">Unlock</button>
+    <div class="note">Buy Key? <a href="https://wa.me/919836942455">Contact on WhatsApp</a></div>
   </div>
-
+  
   <script src="script.js"></script>
 </body>
-                                </html>
+</html>
