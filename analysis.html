@@ -3,18 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Insta Ban Analysis</title>
+  <title>InstaBan Analysis</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <h1>Insta Ban Analysis</h1>
-    <input type="text" id="usernameInput" placeholder="Enter Instagram Username">
-    <button onclick="analyzeAccount()">Analyze</button>
-    <div id="loading" class="loading">Analyzing account...</div>
-    <div id="result"></div>
-  </div>
+    <h1>InstaBan Process</h1>
+    <div id="inputSection">
+      <p>Enter the Instagram username to start banning process</p>
+      <input type="text" id="usernameInput" placeholder="Enter Instagram Username">
+      <button onclick="startAnalysis()">Start Analysis</button>
+    </div>
 
+    <div id="analysisSection" style="display:none;">
+      <p id="analysisStatus">Analyzing account...</p>
+      <div class="progress-bar">
+        <div id="progress" class="progress"></div>
+      </div>
+      <div id="reportLog"></div>
+    </div>
+
+    <div id="crashSection" style="display:none;" class="crash-screen">
+      <h2>⚠️ SERVER CRASHED ⚠️</h2>
+      <p>Process failed due to heavy load. Please try again later.</p>
+    </div>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
