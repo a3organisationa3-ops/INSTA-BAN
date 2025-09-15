@@ -1,26 +1,26 @@
 body {
-  font-family: Arial, sans-serif;
-  background: #0e0e0e;
-  color: #fff;
-  text-align: center;
   margin: 0;
   padding: 0;
+  font-family: Arial, sans-serif;
+  background: #000;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .container {
-  max-width: 400px;
-  margin: auto;
+  text-align: center;
+  background: #111;
   padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
 }
 
 h1 {
-  color: #ff4b4b;
-}
-
-.tagline {
-  font-size: 14px;
-  color: #ccc;
-  margin-bottom: 20px;
+  color: #ff4c4c;
 }
 
 input {
@@ -32,57 +32,39 @@ input {
 }
 
 button {
-  background: #ff4b4b;
-  color: #fff;
   padding: 10px 20px;
+  background: red;
+  color: white;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
 }
 
 button:hover {
-  background: #ff1c1c;
+  background: darkred;
 }
 
-.hidden {
-  display: none;
-}
-
-#result, #key-section, #ban-process, #crash-screen {
+#result {
   margin-top: 20px;
-  text-align: left;
-  background: #1c1c1c;
   padding: 15px;
+  background: #222;
   border-radius: 8px;
+  text-align: left;
 }
 
-#result img {
-  width: 100px;
-  border-radius: 50%;
-}
-
-.error-msg {
-  color: #ff4b4b;
-  margin-top: 5px;
-}
-
-#progress-bar-container {
-  width: 100%;
-  background: #333;
-  border-radius: 5px;
+.loading {
+  display: none;
   margin-top: 15px;
-  height: 20px;
+  color: yellow;
 }
 
-#progress-bar {
-  width: 0%;
-  height: 20px;
-  background: #ff4b4b;
-  border-radius: 5px;
-  transition: width 0.5s ease-in-out;
-}
-
-#progress-text {
+.note {
   margin-top: 10px;
   font-size: 14px;
+}
+
+.note a {
+  color: #ff4c4c;
+  text-decoration: none;
 }
