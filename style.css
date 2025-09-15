@@ -1,9 +1,9 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
   background: #000;
   color: #fff;
+  font-family: Arial, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,12 +11,13 @@ body {
 }
 
 .container {
-  text-align: center;
-  background: #111;
-  padding: 20px;
-  border-radius: 10px;
   width: 90%;
   max-width: 400px;
+  background: #111;
+  padding: 20px;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(255,0,0,0.6);
 }
 
 h1 {
@@ -28,7 +29,8 @@ input {
   padding: 10px;
   margin: 10px 0;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
+  font-size: 16px;
 }
 
 button {
@@ -36,27 +38,13 @@ button {
   background: red;
   color: white;
   border: none;
+  border-radius: 6px;
   cursor: pointer;
-  border-radius: 5px;
   font-size: 16px;
 }
 
 button:hover {
   background: darkred;
-}
-
-#result {
-  margin-top: 20px;
-  padding: 15px;
-  background: #222;
-  border-radius: 8px;
-  text-align: left;
-}
-
-.loading {
-  display: none;
-  margin-top: 15px;
-  color: yellow;
 }
 
 .note {
@@ -67,4 +55,47 @@ button:hover {
 .note a {
   color: #ff4c4c;
   text-decoration: none;
+}
+
+.error {
+  color: yellow;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.progress-bar {
+  width: 100%;
+  background: #333;
+  border-radius: 6px;
+  overflow: hidden;
+  height: 20px;
+  margin: 20px 0;
+}
+
+.progress {
+  width: 0;
+  height: 100%;
+  background: red;
+  transition: width 0.2s ease-in-out;
+}
+
+#reportLog {
+  text-align: left;
+  font-size: 14px;
+  max-height: 200px;
+  overflow-y: auto;
+  background: #222;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.crash-screen {
+  padding: 20px;
+  background: #220000;
+  border: 2px solid red;
+  border-radius: 10px;
+}
+
+.crash-screen h2 {
+  color: red;
 }
