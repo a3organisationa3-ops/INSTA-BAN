@@ -1,86 +1,95 @@
-// === STEP 1: FETCH INSTAGRAM DATA ===
-function fetchData() {
-  const username = document.getElementById("username").value.trim();
+// === CONFIG ===
+const validKey = "INSTABAN980";
+
+// --- Validate Key and Redirect ---
+function validateKey() {
+  const enteredKey = document.getElementById("keyInput").value.trim();
+
+  if (enteredKey === validKey) {
+    // Save key session
+    localStorage.setItem("instaBanKey", enteredKey);
+    window.location.href = "analysis.html";
+  } else {
+    alert("❌ Wrong Key! Please purchase the correct key.");
+  }
+}
+
+// --- Check Key Session ---
+if (window.location.pathname.includes("analysis.html")) {
+  const sessionKey = localStorage.getItem("instaBanKey");
+  if (sessionKey !== validKey) {
+    alert("Access Denied! Please enter valid key.");
+    window.location.href = "index.html";
+  }
+}
+
+// --- Fetch Instagram Public Data ---
+async function fetchInstagramData(username) {
+  try {
+    const url = `https://www.instagram.com/${username}/?__a=1&__d=dis`;
+    const response = await fetch(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error("Account fetch failed");
+    }
+
+    const data = await response.json();
+    return {
+      username: data.graphql.user.username,
+      fullName: data.graphql.user.full_name,
+      followers: data.graphql.user.edge_followed_by.count,
+      following: data.graphql.user.edge_follow.count,
+      bio: data.graphql.user.biography,
+      dp: data.graphql.user.profile_pic_url_hd,
+      isPrivate: data.graphql.user.is_private
+    };
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+// --- Analyze Account Function ---
+async function analyzeAccount() {
+  const username = document.getElementById("usernameInput").value.trim();
+  const loading = document.getElementById("loading");
+  const resultDiv = document.getElementById("result");
+
   if (!username) {
-    alert("Please enter a username!");
+    alert("Please enter an Instagram username.");
     return;
   }
 
-  const url = `https://www.instagram.com/${username}/?__a=1&__d=dis`;
+  loading.style.display = "block";
+  resultDiv.innerHTML = "";
 
-  fetch(url)
-    .then(response => response.json())
-    .then(data => {
-      const userData = data.graphql.user;
+  const data = await fetchInstagramData(username);
 
-      // Fill data into UI
-      document.getElementById("profile-pic").src = userData.profile_pic_url_hd;
-      document.getElementById("full-name").innerText = userData.full_name || "N/A";
-      document.getElementById("user").innerText = userData.username;
-      document.getElementById("bio").innerText = userData.biography || "No bio";
-      document.getElementById("followers").innerText = userData.edge_followed_by.count;
-      document.getElementById("following").innerText = userData.edge_follow.count;
-      document.getElementById("posts").innerText = userData.edge_owner_to_timeline_media.count;
-      document.getElementById("private").innerText = userData.is_private ? "Private" : "Public";
+  loading.style.display = "none";
 
-      // Show results
-      document.getElementById("result").classList.remove("hidden");
-    })
-    .catch(error => {
-      console.error(error);
-      alert("Error fetching data. Account may be private or Instagram blocked the request.");
-    });
-}
-
-// === STEP 2: SHOW KEY INPUT ===
-function showKeyInput() {
-  document.getElementById("key-section").classList.remove("hidden");
-}
-
-// === STEP 3: VERIFY KEY ===
-function verifyKey() {
-  const enteredKey = document.getElementById("access-key").value.trim();
-  const correctKey = "INSTABAN980";
-
-  if (enteredKey === correctKey) {
-    document.getElementById("key-section").classList.add("hidden");
-    startBanProcess();
-  } else {
-    document.getElementById("key-error").innerText = "❌ Wrong key! Please contact admin for correct key.";
+  if (!data) {
+    alert("Error fetching account data. Account may be private or request blocked.");
+    return;
   }
+
+  // Show fetched data
+  resultDiv.innerHTML = `
+    <h3>${data.fullName} (@${data.username})</h3>
+    <img src="${data.dp}" alt="Profile Picture" width="100" style="border-radius:50%;margin:10px 0;">
+    <p><strong>Followers:</strong> ${data.followers}</p>
+    <p><strong>Following:</strong> ${data.following}</p>
+    <p><strong>Bio:</strong> ${data.bio}</p>
+    <p><strong>Private Account:</strong> ${data.isPrivate ? "Yes 🔒" : "No 🌐"}</p>
+    <button onclick="startBanProcess()">Start Ban Process</button>
+  `;
 }
 
-// === STEP 4: BAN PROCESS ===
+// --- Ban Process (Fake Loader + Redirect) ---
 function startBanProcess() {
-  document.getElementById("ban-process").classList.remove("hidden");
-
-  let progress = 0;
-  const progressBar = document.getElementById("progress-bar");
-  const progressText = document.getElementById("progress-text");
-
-  const steps = [
-    "Initializing ban request...",
-    "Connecting to Instagram servers...",
-    "Validating target account...",
-    "Generating reports...",
-    "Submitting ban request...",
-    "Finalizing process..."
-  ];
-
-  const interval = setInterval(() => {
-    if (progress >= 100) {
-      clearInterval(interval);
-      setTimeout(showCrashScreen, 1000);
-    } else {
-      progress += 20;
-      progressBar.style.width = progress + "%";
-      progressText.innerText = steps[Math.floor(progress / 20) - 1] || "Processing...";
-    }
-  }, 2000); // 2 sec per step
+  alert("Ban process started! This will take 5-8 hours to complete.\nYou will be notified when done.");
+  window.location.href = "https://wa.me/919836942455?text=I%20want%20to%20buy%20the%20InstaBan%20key";
 }
-
-// === STEP 5: SHOW CRASH SCREEN ===
-function showCrashScreen() {
-  document.getElementById("ban-process").classList.add("hidden");
-  document.getElementById("crash-screen").classList.remove("hidden");
-    }
